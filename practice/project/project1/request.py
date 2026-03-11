@@ -30,3 +30,10 @@ class LogInRequest(BaseModel):
 
 # 전체 사용자 -> 재설정 안내 w.마감 기한
 # {id: 1, password: string, email: ...}
+
+class HealthProfileCreateRequest(BaseModel):
+    age: int
+    height_cm: float
+    weight_kg: float
+    smoking: bool
+    exercise_per_week: int
