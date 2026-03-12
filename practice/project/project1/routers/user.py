@@ -47,6 +47,35 @@ async def signup_handler(
         # new_user에 이미 id/password 다 지정되어있다.
         return new_user
 
+@router.delete(
+    "/users",
+    summary="회원탈퇴 API",
+    status_code=status.HTTP_204_NO_CONTENT,
+)
+
+async def delete_user_handler(
+    user_id: int = Depends(verify_user),
+    session = Depends(get_session),
+):
+    # [1] user 조회
+    stmt = select(User).where(User.id == user_id)
+    user = await session.scalar(stmt)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="user not found")
+    
+    
+    # [2] DB에서 삭제
+    # HealthProfile 삭제
+
+    # Hard Delete: FK 제약 ondelete="CASCADE" 속성을 이용해서 연관 객체 자동 삭제
+    # await session.delete(user)
+    # await session.commit()
+    
+    # [3] Soft Delete: email/password hash만 삭제 나머지 기록은 유지.(수정)/ 실제 데이터를 삭제하지 않고 개인정보 마스킹
+    user.soft_delete()
+    await session.commit()
+
+
 
 @router.post(
     "/user/login",

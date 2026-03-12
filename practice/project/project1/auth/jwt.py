@@ -23,6 +23,8 @@ def verify_access_token(access_token: str) -> dict:
         payload = jwt.decode(access_token, settings.JWT_SECRET_KEY, algorithms=["HS256"])
     except jwt.DecodeError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid token")
+    except jwt.ExpiredSignatureError:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid expired")
     return payload
 
 http_bearer = HTTPBearer()

@@ -23,3 +23,4 @@ app.include_router(prediction_router)
 
 
 # 토큰   eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIyIiwiZXhwIjoxNzczMjgyODYyfQ.t1aOpyFHEkJhx8A6xU5S90yer80gaDZv9ybIbz57cKU
+# eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNzczMzc2NDkzfQ.twwMSUigDijkPl40hmM-0zJL8FI5trMlgCOSAu7TAbk
